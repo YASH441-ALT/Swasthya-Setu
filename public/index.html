@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" data-doctor="<%= doctor.username %>">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/app.js"></script>
+</head>
+<body data-doctor="<%= doctor.username %>">
+  <h2>Welcome, Dr. <%= doctor.username %> 👨‍⚕️</h2>
+  <input type="text" id="searchInput" placeholder="Search patients by name..." />
+  <div id="patientList"></div>
+</div>
+<a href="/logout" class="btn btn-outline-danger"><span>Logout</span></a>
+<a href="/add.html">➕ Add New Patient</a>
+</body>
+</html>

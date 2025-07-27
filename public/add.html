@@ -1,0 +1,97 @@
+<!-- public/add.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Patient</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin-top: 60px;
+      background-color: white;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add New Patient</h2>
+    <form id="addForm">
+      <div class="form-group">
+        <label for="name">Patient Name</label>
+        <input type="text" class="form-control" id="name" name="name" required/>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" name="age" required/>
+      </div>
+      <div class="form-group">
+        <label for="disease">Disease</label>
+        <input type="text" class="form-control" id="disease" name="disease" required/>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Patient</button>
+    </form>
+
+    <a id="backBtn" class="btn btn-secondary mt-3">⬅ Back</a>
+  </div>
+
+  <script>
+    document.getElementById('addForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const disease = document.getElementById('disease').value;
+
+      const response = await fetch('/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, age, disease })  // doctor will be picked from session
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        const username = sessionStorage.getItem("doctorUsername");
+        window.location.href = `/doctor/${username}/patients`;
+      } else {
+        alert("Something went wrong!");
+      }
+    });
+
+    const username = sessionStorage.getItem("doctorUsername");
+    document.getElementById("backBtn").href = username ? `/doctor/${username}/patients` : "/";
+  </script>
+</body>
+</html>

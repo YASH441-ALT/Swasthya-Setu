@@ -1,0 +1,26 @@
+[
+  {
+    "name": "yash",
+    "age": "19",
+    "disease": "knee pain",
+    "doctor": "asm1323"
+  },
+  {
+    "name": "chaitanya",
+    "age": "22",
+    "disease": "coronary heart disease",
+    "doctor": "asm1323"
+  },
+  {
+    "name": "joseph",
+    "age": "19",
+    "disease": "pneumonia",
+    "doctor": "asm1323"
+  },
+  {
+    "name": "siddhart",
+    "age": "19",
+    "disease": "migrane",
+    "doctor": "asm1323"
+  }
+]
